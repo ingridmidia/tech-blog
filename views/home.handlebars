@@ -3,7 +3,7 @@
     <div class="card col-11 mx-auto m-4 my-card">
         <div class="card-header bg-lilac">
             <h5>{{post.title}}</h5>
-            <h9>Posted by {{post.user.username}} on {{post.createdAt}}</h9>
+            <h9>Posted by {{post.user.username}} on {{format_time post.createdAt}}</h9>
         </div>
         <div class="card-body">
             <p class="card-text">{{post.content}}</p>

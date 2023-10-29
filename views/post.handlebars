@@ -2,7 +2,7 @@
     <div class="card col-11 mx-auto m-4 my-card">
         <div class="card-header bg-lilac">
             <h5>{{post.title}}</h5>
-            <h9>Posted by {{post.user.username}} on {{post.createdAt}}</h9>
+            <h9>Posted by {{post.user.username}} on {{format_time post.createdAt}}</h9>
         </div>
         <div class="card-body">
             <p class="card-text">{{post.content}}</p>
@@ -27,7 +27,7 @@
             </form>
             {{#each comments as |comment|}}
             <p class="card-text">{{comment.content}}</p>
-            <p class="card-text">-{{comment.user.username}}, {{comment.createdAt}}</p>
+            <p class="card-text">-{{comment.user.username}}, {{format_time comment.createdAt}}</p>
             <hr>
             {{/each}}
         </div>
