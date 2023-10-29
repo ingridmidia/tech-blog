@@ -1,12 +1,14 @@
-body {
-    font-family: 'Courier New', Courier, monospace;
-}
-
 header {
     background-color: rgb(234, 228, 240);
     border-bottom: solid rgb(139, 76, 198);
+    font-family: 'Courier New', Courier, monospace;
 }
 
 .my-navbar {
     background-color: rgb(244, 241, 247) !important;
+    font-family: 'Courier New', Courier, monospace;
+}
+
+.my-card {
+    border: solid rgb(139, 76, 198);
 }
