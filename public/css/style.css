@@ -12,3 +12,7 @@ header {
 .my-card {
     border: solid rgb(139, 76, 198);
 }
+
+.bg-lilac {
+    background-color: rgb(234, 228, 240);
+}
