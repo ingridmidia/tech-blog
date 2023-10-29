@@ -16,11 +16,3 @@ header {
 .bg-lilac {
     background-color: rgb(234, 228, 240);
 }
-
-#content {
-    height: 300px;
-}
-
-#comment {
-    height: 80px;
-}

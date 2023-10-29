@@ -54,4 +54,10 @@ router.get("/new-post", async (req, res) => {
     res.render("newPost");
 });
 
+// Update a post
+router.get("/update-post", async (req, res) => {
+    res.render("updatePost");
+});
+
+
 module.exports = router;
