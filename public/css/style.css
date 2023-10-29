@@ -1,4 +1,12 @@
-.my-navbar{
-    background-color: rgb(151, 120, 179) !important;
-    padding: 20;
+body {
+    font-family: 'Courier New', Courier, monospace;
+}
+
+header {
+    background-color: rgb(234, 228, 240);
+    border-bottom: solid rgb(139, 76, 198);
+}
+
+.my-navbar {
+    background-color: rgb(244, 241, 247) !important;
 }
