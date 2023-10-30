@@ -36,7 +36,11 @@ router.get("/post/:id", async (req, res) => {
 
 // Login route
 router.get("/login", async (req, res) => {
-    res.render("login");
+    if (req.session.logged_in) {
+        res.redirect('/dashboard');
+        return;
+    }
+    res.render('login');
 });
 
 // Sign up route
@@ -58,6 +62,5 @@ router.get("/new-post", async (req, res) => {
 router.get("/update-post", async (req, res) => {
     res.render("updatePost");
 });
-
 
 module.exports = router;
