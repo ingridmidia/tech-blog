@@ -16,22 +16,26 @@ router.get('/', async (req, res) => {
 
 // GET one post
 router.get("/post/:id", async (req, res) => {
-    try {
-        const postData = await Post.findByPk(req.params.id, { include: [{ model: User }] });
-        const post = postData.get({ plain: true });
-        const commentsData = await Comment.findAll({
-            where: {
-                post_id: req.params.id
-            },
-            include: [{ model: User }]
-        });
-        const comments = commentsData.map(comment => {
-            return comment.get({ plain: true })
-        });
-        res.render('post', { post, comments });
-    } catch (err) {
-        res.status(500).json(err);
-    };
+    if (req.session.logged_in) {
+        try {
+            const postData = await Post.findByPk(req.params.id, { include: [{ model: User }] });
+            const post = postData.get({ plain: true });
+            const commentsData = await Comment.findAll({
+                where: {
+                    post_id: req.params.id
+                },
+                include: [{ model: User }]
+            });
+            const comments = commentsData.map(comment => {
+                return comment.get({ plain: true })
+            });
+            res.render('post', { post, comments });
+        } catch (err) {
+            res.status(500).json(err);
+        };
+    } else {
+        res.redirect("/login");
+    }
 });
 
 // Login route
@@ -50,17 +54,29 @@ router.get("/signup", async (req, res) => {
 
 // Dashboard route
 router.get("/dashboard", async (req, res) => {
-    res.render("dashboard")
+    if (!req.session.logged_in) {
+        res.redirect("login");
+    } else {
+        res.render("dashboard");
+    }
 });
 
 // Create new post
 router.get("/new-post", async (req, res) => {
-    res.render("newPost");
+    if (!req.session.logged_in) {
+        res.redirect("login");
+    } else {
+        res.render("newPost");
+    }
 });
 
 // Update a post
 router.get("/update-post", async (req, res) => {
-    res.render("updatePost");
+    if (!req.session.logged_in) {
+        res.redirect("login");
+    } else {
+        res.render("updatePost");
+    }
 });
 
 module.exports = router;
