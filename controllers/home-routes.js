@@ -57,7 +57,18 @@ router.get("/dashboard", async (req, res) => {
     if (!req.session.logged_in) {
         res.redirect("login");
     } else {
-        res.render("dashboard");
+        try {
+            const postsData = await Post.findAll({
+                where: { user_id: req.session.user_id },
+                include: [{ model: User }]
+            });
+            const posts = postsData.map(post => {
+                return post.get({ plain: true })
+            });
+            res.render('dashboard', { posts });
+        } catch (err) {
+            res.status(500).json(err);
+        };
     }
 });
 

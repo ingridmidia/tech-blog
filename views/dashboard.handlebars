@@ -1,16 +1,19 @@
 <h1 class="p-3">Your Posts</h1>
+
+{{#each posts as |post|}}
 <div class="row">
     <div class="card col-11 mx-auto m-4 my-card">
         <div class="card-header bg-lilac">
-            <h5>Post Title</h5>
-            <h9>Date</h9>
+            <h5>{{post.title}}</h5>
+            <h9>{{format_time post.createdAt}}</h9>
         </div>
         <div class="card-body">
             <button type="submit" class="btn btn-outline-dark btn-sm">Update</button>
-            <button type="submit" class="btn btn-outline-dark btn-sm">Delete</button>
+            <button type="submit" class="btn btn-outline-danger btn-sm">Delete</button>
         </div>
     </div>
 </div>
+{{/each}}
 
 <div class="row">
     <div class="d-grid col-11 mx-auto">
