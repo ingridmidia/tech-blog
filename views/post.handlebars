@@ -16,15 +16,16 @@
             <h5>Comments</h5>
         </div>
         <div class="card-body">
+            {{#if logged_in}}
             <form>
                 <div class="mb-3">
                     <div class="form-floating">
-                        <textarea class="form-control" id="comment"
-                            style="height: 100px"></textarea>
+                        <textarea class="form-control" id="comment" style="height: 100px"></textarea>
                     </div>
                 </div>
                 <button type="submit" class="btn btn-outline-dark btn-sm" id="comment-button">Comment</button>
             </form>
+            {{/if}}
             {{#each comments as |comment|}}
             <p class="card-text">{{comment.content}}</p>
             <p class="card-text">-{{comment.user.username}}, {{format_time comment.createdAt}}</p>

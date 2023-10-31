@@ -16,26 +16,22 @@ router.get('/', async (req, res) => {
 
 // GET one post
 router.get("/post/:id", async (req, res) => {
-    if (req.session.logged_in) {
-        try {
-            const postData = await Post.findByPk(req.params.id, { include: [{ model: User }] });
-            const post = postData.get({ plain: true });
-            const commentsData = await Comment.findAll({
-                where: {
-                    post_id: req.params.id
-                },
-                include: [{ model: User }]
-            });
-            const comments = commentsData.map(comment => {
-                return comment.get({ plain: true })
-            });
-            res.render('post', { post, comments, logged_in: req.session.logged_in });
-        } catch (err) {
-            res.status(500).json(err);
-        };
-    } else {
-        res.redirect("/login");
-    }
+    try {
+        const postData = await Post.findByPk(req.params.id, { include: [{ model: User }] });
+        const post = postData.get({ plain: true });
+        const commentsData = await Comment.findAll({
+            where: {
+                post_id: req.params.id
+            },
+            include: [{ model: User }]
+        });
+        const comments = commentsData.map(comment => {
+            return comment.get({ plain: true })
+        });
+        res.render('post', { post, comments, logged_in: req.session.logged_in });
+    } catch (err) {
+        res.status(500).json(err);
+    };
 });
 
 // Login route
