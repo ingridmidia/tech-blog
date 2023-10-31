@@ -1,6 +1,8 @@
 document.getElementById("comment-button").addEventListener("click", addComment);
 
 async function addComment(event) {
+    event.preventDefault();
+    
     const content = document.getElementById("comment").value.trim();
     const urlData = window.location.toString().split('/');
     const id = urlData[urlData.length - 1];
