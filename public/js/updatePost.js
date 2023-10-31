@@ -1,15 +1,17 @@
-document.getElementById("newpost-form").addEventListener("submit", newPost);
+document.getElementById("update-form").addEventListener("submit", updatePost);
 
-async function newPost(event) {
+async function updatePost(event) {
     event.preventDefault();
 
     const title = document.getElementById("title").value.trim();
     const content = document.getElementById("content").value.trim();
+    const urlData = window.location.toString().split('/');
+    const id = urlData[urlData.length - 1];
 
     if (title && content) {
-        const response = await fetch("/api/post", {
+        const response = await fetch(`/api/post/${id}`, {
             method: "POST",
-            body: JSON.stringify({ title, content}),
+            body: JSON.stringify({ title, content }),
             headers: { "Content-Type": "application/json" },
         });
 

@@ -82,11 +82,17 @@ router.get("/new-post", async (req, res) => {
 });
 
 // Update a post
-router.get("/update-post", async (req, res) => {
+router.get("/update-post/:id", async (req, res) => {
     if (!req.session.logged_in) {
         res.redirect("login");
     } else {
-        res.render("updatePost");
+        try {
+            const postData = await Post.findByPk(req.params.id);
+            const post = postData.get({ plain: true });
+            res.render("updatePost", { post });
+        } catch (err) {
+            res.status(500).json(err);
+        };
     }
 });
 
