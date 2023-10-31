@@ -48,6 +48,7 @@ router.delete("/:id", async (req, res) => {
         })
         res.status(200).end();
     } catch (err) {
+        console.error(err);
         res.status(500).json('Error in deleting post');
     }
 });
