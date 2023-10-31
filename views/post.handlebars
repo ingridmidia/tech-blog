@@ -23,7 +23,7 @@
                             style="height: 100px"></textarea>
                     </div>
                 </div>
-                <button type="submit" class="btn btn-outline-dark btn-sm">Comment</button>
+                <button type="submit" class="btn btn-outline-dark btn-sm" id="comment-button">Comment</button>
             </form>
             {{#each comments as |comment|}}
             <p class="card-text">{{comment.content}}</p>
@@ -33,3 +33,5 @@
         </div>
     </div>
 </div>
+
+<script src="/js/comment.js"></script>
