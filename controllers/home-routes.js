@@ -8,7 +8,7 @@ router.get('/', async (req, res) => {
         const posts = postsData.map(post => {
             return post.get({ plain: true })
         });
-        res.render('home', { posts });
+        res.render('home', { posts, logged_in: req.session.logged_in });
     } catch (err) {
         res.status(500).json(err);
     };
@@ -29,7 +29,7 @@ router.get("/post/:id", async (req, res) => {
             const comments = commentsData.map(comment => {
                 return comment.get({ plain: true })
             });
-            res.render('post', { post, comments });
+            res.render('post', { post, comments, logged_in: req.session.logged_in });
         } catch (err) {
             res.status(500).json(err);
         };
@@ -44,12 +44,12 @@ router.get("/login", async (req, res) => {
         res.redirect('/dashboard');
         return;
     }
-    res.render('login');
+    res.render('login', { logged_in: req.session.logged_in });
 });
 
 // Sign up route
 router.get("/signup", async (req, res) => {
-    res.render("signup");
+    res.render("signup", { logged_in: req.session.logged_in });
 });
 
 // Dashboard route
@@ -65,7 +65,7 @@ router.get("/dashboard", async (req, res) => {
             const posts = postsData.map(post => {
                 return post.get({ plain: true })
             });
-            res.render('dashboard', { posts });
+            res.render('dashboard', { posts, logged_in: req.session.logged_in });
         } catch (err) {
             res.status(500).json(err);
         };
@@ -77,7 +77,7 @@ router.get("/new-post", async (req, res) => {
     if (!req.session.logged_in) {
         res.redirect("login");
     } else {
-        res.render("newPost");
+        res.render("newPost", { logged_in: req.session.logged_in });
     }
 });
 
@@ -89,7 +89,7 @@ router.get("/update-post/:id", async (req, res) => {
         try {
             const postData = await Post.findByPk(req.params.id);
             const post = postData.get({ plain: true });
-            res.render("updatePost", { post });
+            res.render("updatePost", { post, logged_in: req.session.logged_in });
         } catch (err) {
             res.status(500).json(err);
         };
